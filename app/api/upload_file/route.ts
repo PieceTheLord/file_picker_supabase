@@ -57,6 +57,7 @@ export async function POST(request: Request): Promise<NextResponse> {
     const { data: fileData, error: insertFileError } = await insertFileDetails(
       uploadedFileData.path,
       file.name,
+      link.signedUrl
     );
 
     if (insertFileError) {

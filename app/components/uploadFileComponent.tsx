@@ -1,25 +1,37 @@
-import { Table } from "@/components/ui/table";
+import { Button } from "@/components/ui/button";
 import { getCurrentUserData } from "../utils/getCurrentUesrData";
 import { getCurrentUserLinks } from "../utils/getCurrentUserLinks";
 import { EmptyOutline } from "./emptyFile";
+import { URLsTable } from "./urlsTable";
 
+export async function UploadFileComponent() {
+  const {
+    data: { user: userData },
+    error: userError,
+  } = await getCurrentUserData();
 
-export default async function Page() {
-    const {
-      data: { user: userData },
-      error: userError,
-    } = await getCurrentUserData();
-  
-    const {data:links, error:linksError} = userData
-      ? await getCurrentUserLinks(userData.email!)
-      : { data: null, error: null };
-  
-    console.log("links", links);
+  const { data: links, error: linksError } = userData
+    ? await getCurrentUserLinks(userData.email!)
+    : { data: null, error: null };
 
-  if (links) {
-    return <Table></Table>
+  console.log("links", links);
+  if (linksError) {
+    console.error(
+      "retrieving links error in uploadFileCmponents.tsx at 18 line"
+    );
+    throw new Error(`retrieving links error ${linksError}`);
   }
-  else {
-    return <EmptyOutline />
+
+  if (links!.length > 0) {
+    return (
+      <>
+        <a href="/protected">
+          <Button>Upload file</Button>
+        </a>
+        <URLsTable links={links!} />
+      </>
+    );
+  } else {
+    return <EmptyOutline />;
   }
 }

@@ -2,14 +2,9 @@ import { AuthButton } from "@/components/auth-button";
 import { ThemeSwitcher } from "@/components/theme-switcher";
 import { Suspense } from "react";
 import { EmptyOutline } from "./components/emptyFile";
-import { createClient } from "@/lib/supabase/server";
-import { getCurrentUserData } from "./utils/getCurrentUesrData";
-import { getCurrentUserLinks } from "./utils/getCurrentUserLinks";
-import { Table } from "@/components/ui/table";
+import { UploadFileComponent } from "./components/uploadFileComponent";
 
 export default async function Home() {
-
-
   return (
     <main className="min-h-screen flex flex-col items-center">
       <div className="flex-1 w-full flex flex-col gap-20 items-center justify-center">
@@ -32,11 +27,11 @@ export default async function Home() {
             <p className="text-md">
               Get started today and experience seamless file sharing and access.
             </p>
-            {/* //TODO: Implement component to show up the appropriate components */}
-            <Suspense fallback={<p>Loading files...</p>}>
-              <EmptyOutline />
-            </Suspense>
-            <Table>Table</Table>
+            <div className="flex flex-col items-center justify-start gap-10 mt-16">
+              <Suspense fallback={<p>Loading files...</p>}>
+                <UploadFileComponent />
+              </Suspense>
+            </div>
           </section>
         </div>
 
