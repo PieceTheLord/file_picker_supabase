@@ -5,8 +5,10 @@ import { cookies } from "next/headers";
  * Especially important if using Fluid compute: Don't put this client in a
  * global variable. Always create a new client within each function when using
  * it.
+ * ! Use on the only Server-Side
  */
 export async function createClient() {
+
   const cookieStore = await cookies();
 
   return createServerClient(
@@ -20,7 +22,7 @@ export async function createClient() {
         setAll(cookiesToSet) {
           try {
             cookiesToSet.forEach(({ name, value, options }) =>
-              cookieStore.set(name, value, options),
+              cookieStore.set(name, value, options)
             );
           } catch {
             // The `setAll` method was called from a Server Component.
@@ -29,6 +31,6 @@ export async function createClient() {
           }
         },
       },
-    },
+    }
   );
 }
