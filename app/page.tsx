@@ -15,7 +15,7 @@ export default async function Home() {
             </Suspense>
           </div>
         </nav>
-        <div className="flex-1 flex flex-col gap-20 max-w-5xl p-5">
+        <div className="flex-1 flex flex-col gap-20 max-w-5xl p-5 w-full">
           <section className="text-center">
             <h1 className="text-4xl font-bold mb-4">
               Welcome our dear friend!

@@ -22,7 +22,9 @@ export async function UploadFileComponent() {
     throw new Error(`retrieving links error ${linksError}`);
   }
 
-  if (links!.length > 0) {
+  if (!links) {
+    return <EmptyOutline />;
+  } else {
     return (
       <>
         <a href="/protected">
@@ -31,7 +33,5 @@ export async function UploadFileComponent() {
         <URLsTable links={links!} />
       </>
     );
-  } else {
-    return <EmptyOutline />;
   }
 }
