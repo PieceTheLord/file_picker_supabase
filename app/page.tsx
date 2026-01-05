@@ -4,6 +4,7 @@ import { Suspense } from "react";
 import { EmptyOutline } from "./components/emptyFile";
 import { UploadFileComponent } from "./components/uploadFileComponent";
 
+
 export default async function Home() {
   return (
     <main className="min-h-screen flex flex-col items-center">

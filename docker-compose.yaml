@@ -1,0 +1,13 @@
+services:
+  nextjs-app:
+    build: .
+    ports:
+      - "9000:8080"
+
+    environment:
+      - NEXT_PUBLIC_SUPABASE_URL=http://localhost:8000
+      - NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlzcyI6InN1cGFiYXNlIiwiaWF0IjoxNzY3MTI4NDAwLCJleHAiOjE5MjQ4OTQ4MDB9.z4vADbMmIYxSesUwhUuItwW4agzIt4koNISLJZmJN2E
+      - SUPABASE_STORAGE_BUCKET_NAME=new_bucket
+      - SUPABASE_DATABASE_FILES_ID=files
+    env_file:
+      - .env.local

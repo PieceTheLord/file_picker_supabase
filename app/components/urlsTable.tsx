@@ -47,12 +47,18 @@ export async function URLsTable({ links }: { links: Link[] }) {
               className="font-medium text-left flex justify-center items-center gap-8"
               key={link.signedURL}
             >
-              <a href={link.signedURL}>
-                <Button>Download</Button>
-              </a>
-              <Suspense fallback="loading CSR">
-                <PopoverCopy link={link.signedURL} />
-              </Suspense>
+              {new Date(link.expires_at) > new Date() ? (
+                <>
+                  <a href={link.signedURL}>
+                    <Button>Download</Button>
+                  </a>
+                  <Suspense fallback="loading CSR">
+                    <PopoverCopy link={link.signedURL} />
+                  </Suspense>
+                </>
+              ) : (
+                <p>Unavailable to download</p>
+              )}
             </TableCell>
             <TableCell className="text-left" key={link.expires_at}>
               {formatLocalTime(link.expires_at)}

@@ -1,0 +1,21 @@
+
+FROM node:24-alpine
+WORKDIR /app
+COPY . .
+RUN npm ci
+ARG NEXT_PUBLIC_SUPABASE_URL
+ARG NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY
+ARG SUPABASE_STORAGE_BUCKET_NAME
+ARG SUPABASE_DATABASE_FILES_ID
+ENV NEXT_PUBLIC_SUPABASE_URL=https://zestfully-flamboyant-springbuck.cloudpub.ru/
+ENV NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlzcyI6InN1cGFiYXNlIiwiaWF0IjoxNzY3MTI4NDAwLCJleHAiOjE5MjQ4OTQ4MDB9.z4vADbMmIYxSesUwhUuItwW4agzIt4koNISLJZmJN2E
+ENV SUPABASE_STORAGE_BUCKET_NAME=new_bucket
+ENV SUPABASE_DATABASE_FILES_ID=files
+
+
+# Copy only necessary standalone files
+# COPY --from=builder /app/public ./public
+RUN npm run build
+EXPOSE 3000
+
+CMD ["node", ".next/standalone/server.js"]
