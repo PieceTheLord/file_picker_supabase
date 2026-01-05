@@ -4,7 +4,6 @@ import { Suspense } from "react";
 import { EmptyOutline } from "./components/emptyFile";
 import { UploadFileComponent } from "./components/uploadFileComponent";
 
-
 export default async function Home() {
   return (
     <main className="min-h-screen flex flex-col items-center">
@@ -36,9 +35,12 @@ export default async function Home() {
           </section>
         </div>
 
-        <footer className="w-full flex items-center justify-center border-t mx-auto text-center text-xs py-16">
-          <p className="text-[14px] font-thin">Chose your theme:</p>
-          <ThemeSwitcher />
+        <footer className="w-full flex flex-col items-center justify-center border-t mx-auto text-center text-xs py-16">
+          <div className="flex items-center">
+            <p className="text-[14px] font-thin">Chose your theme:</p>
+            <ThemeSwitcher />
+          </div>
+          <p className="text-[14px] font-thin">ИНН(INN) - 312823638291</p>
         </footer>
       </div>
     </main>
