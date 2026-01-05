@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/table";
 import { formatLocalTime } from "../utils/formatDate";
 import { Button } from "@/components/ui/button";
-import { CircleCheck } from "lucide-react";
+import { CircleCheck, CircleX } from "lucide-react";
 import { Suspense } from "react";
 import React from "react";
 import { PopoverCopy } from "./popover";
@@ -39,10 +39,14 @@ export async function URLsTable({ links }: { links: Link[] }) {
         {links!.map((link) => (
           <TableRow key={link.id}>
             <TableCell className="font-medium text-left" key={link.file_name}>
-              {link.file_name.split("-").slice(1).join("").slice(0, 25) +
-                ". . ."}
+              {link.file_name.length > 25
+                ? link.file_name.slice(0, 25) + ". . ."
+                : link.file_name}
             </TableCell>
-            <TableCell className="font-medium text-left flex justify-center items-center gap-8" key={link.signedURL}>
+            <TableCell
+              className="font-medium text-left flex justify-center items-center gap-8"
+              key={link.signedURL}
+            >
               <a href={link.signedURL}>
                 <Button>Download</Button>
               </a>
@@ -53,11 +57,12 @@ export async function URLsTable({ links }: { links: Link[] }) {
             <TableCell className="text-left" key={link.expires_at}>
               {formatLocalTime(link.expires_at)}
             </TableCell>
-            <TableCell
-              className="flex justify-center items-center "
-              key={link.created_at}
-            >
-              <CircleCheck />
+            <TableCell className="flex justify-end " key={link.created_at}>
+              {new Date(link.expires_at) > new Date() ? (
+                <CircleCheck />
+              ) : (
+                <CircleX />
+              )}
             </TableCell>
           </TableRow>
         ))}

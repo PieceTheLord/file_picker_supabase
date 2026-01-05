@@ -3,26 +3,25 @@ import { insertFileDetails } from "@/app/utils/insertFileDetails";
 import { uploadFile } from "@/app/utils/uplaodFile";
 import { createClient } from "@/lib/supabase/server";
 import { NextResponse } from "next/server";
-
+import { v4 as uuidv4 } from "uuid";
 export async function POST(request: Request): Promise<NextResponse> {
   try {
     const supabase = await createClient();
     const {
       data: { user },
     } = await supabase.auth.getUser();
-
     const formData = await request.formData();
     const file = formData.get("file") as File | null;
+    const fileExt = file!.name.split(".").pop();
+    const safeFileName = `${uuidv4()}.${fileExt}`;
+    const bucketName = process.env.SUPABASE_STORAGE_BUCKET_NAME!;
+    const filePath = `uploads/${safeFileName}`;
 
     if (!file) {
       return NextResponse.json({ error: "File is required." }, { status: 400 });
     }
 
-    const fileName = `${Date.now()}-${file.name.split(" ").join("-")}`;
     const fileBuffer = await file.arrayBuffer();
-
-    const bucketName = process.env.SUPABASE_STORAGE_BUCKET_NAME!;
-    const filePath = `uploads/${fileName}`;
 
     const { data: uploadedFileData, error: uploadFileError } = await uploadFile(
       bucketName,
@@ -43,7 +42,8 @@ export async function POST(request: Request): Promise<NextResponse> {
 
     const { data: link, error: signedUrlError } = await createSignedURL_day(
       uploadedFileData.path,
-      bucketName
+      bucketName,
+      file.name
     );
 
     if (signedUrlError) {
