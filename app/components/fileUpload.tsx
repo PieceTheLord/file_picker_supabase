@@ -27,6 +27,7 @@ import {
   FileUploadTrigger,
 } from "@/components/ui/file-upload";
 import { createClient } from "@/lib/supabase/client";
+import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
   files: z
@@ -69,6 +70,8 @@ async function uploadFile(file: File) {
 export function FileUploadFormDemo() {
   const maxUploadFiles = 1;
   const maxFileMeomory = 5; // Mb
+  const router = useRouter();
+  const [Loading, setLoading] = React.useState<boolean>(false)
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -80,6 +83,7 @@ export function FileUploadFormDemo() {
     async (data: FormValues) => {
       try {
         // Upload each file
+        setLoading(true)
         const uploadPromises = data.files.map((file) => uploadFile(file));
         const uploadResults = await Promise.all(uploadPromises);
 
@@ -93,7 +97,7 @@ export function FileUploadFormDemo() {
                     result,
                   })),
                   null,
-                  2
+                  2,
                 )}
               </code>
             </pre>
@@ -105,9 +109,11 @@ export function FileUploadFormDemo() {
         });
       } finally {
         form.reset();
+        router.push("/");
+        setLoading(false)
       }
     },
-    [form]
+    [form],
   );
 
   return (
@@ -171,7 +177,7 @@ export function FileUploadFormDemo() {
           )}
         />
         <Button type="submit" className="mt-4">
-          Submit
+          {Loading ? "Loading . . ." : "Submit"}
         </Button>
       </form>
     </Form>
