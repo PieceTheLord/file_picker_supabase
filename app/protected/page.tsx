@@ -1,28 +1,20 @@
-import { redirect } from "next/navigation";
-
-import { createClient } from "@/lib/supabase/server";
 import { FileUploadFormDemo } from "../components/fileUpload";
 import { Button } from "@/components/ui/button";
-import { Empty } from "@/components/ui/empty";
+import { handlePayment } from "../payments/HandlePayment";
+import { Suspense } from "react";
+import PaymentBtn from "../components/paymentBtn";
 
-async function UserDetails() {
-  const supabase = await createClient();
-  const { data, error } = await supabase.auth.getClaims();
-
-  if (error || !data?.claims) {
-    redirect("/auth/login");
-  }
-
-  return JSON.stringify(data.claims, null, 2);
-}
-
-export default function ProtectedPage() {
+export default async function ProtectedPage() {
   return (
     <div className="flex-1 w-full flex flex-col gap-12">
       <div className="w-full">
-        <a href="/"><Button>Back</Button></a>
+        <a href="/">
+          <Button>Back</Button>
+        </a>
         <FileUploadFormDemo></FileUploadFormDemo>
-        
+        <Suspense>
+          <PaymentBtn/>
+        </Suspense>
       </div>
     </div>
   );
