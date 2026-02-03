@@ -1,8 +1,5 @@
-import { FileUploadFormDemo } from "../components/fileUpload";
+import { FileUploadFormDemo } from "../../components/fileUpload";
 import { Button } from "@/components/ui/button";
-import { handlePayment } from "../payments/HandlePayment";
-import { Suspense } from "react";
-import PaymentBtn from "../components/paymentBtn";
 
 export default async function ProtectedPage() {
   return (
@@ -12,9 +9,11 @@ export default async function ProtectedPage() {
           <Button>Back</Button>
         </a>
         <FileUploadFormDemo></FileUploadFormDemo>
+        {/* 
+        // * Yookassa in state of choosing 
         <Suspense>
           <PaymentBtn/>
-        </Suspense>
+        </Suspense> */}
       </div>
     </div>
   );

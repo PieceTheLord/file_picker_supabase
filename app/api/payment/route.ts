@@ -9,18 +9,27 @@ export async function POST(request: Request) {
   console.log("Payment request initiated with idempotency key:", idempotenceKey); // Added logging
 
   const createPayload: ICreatePayment = {
+
+
     amount: {
-      value: '2.00',
-      currency: 'RUB'
+      value: "2.00",
+      currency: "RUB"
     },
     payment_method_data: {
-      type: 'bank_card',
-
+      type: "sbp",
+      card: {
+        number: "5555555555554477", // Test card number
+        expiry_month: "11",
+        expiry_year: "2027",
+        csc: "333",
+        cardholder: "John Doe"
+      }
     },
     confirmation: {
-      type: 'redirect',
-      return_url: 'http://localhost:8080'
-    }
+      type: "redirect",
+      return_url: "http://localhost:8080"
+    },
+    capture: true,
   };
 
   try {
