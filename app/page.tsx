@@ -4,6 +4,7 @@ import { Suspense } from "react";
 import { EmptyOutline } from "./components/emptyFile";
 import { UploadFileComponent } from "./components/uploadFileComponent";
 import Footer from "./components/footer";
+import { Navbar } from "./components/navbar";
 
 export default async function Home() {
   return (
@@ -12,7 +13,7 @@ export default async function Home() {
         <nav className="w-full flex justify-center border-b border-b-foreground/10 h-16">
           <div className="w-full max-w-5xl flex justify-end items-center p-3 px-5 text-sm">
             <Suspense fallback={<p>Loading Auth...</p>}>
-              <AuthButton />
+              <Navbar />
             </Suspense>
           </div>
         </nav>

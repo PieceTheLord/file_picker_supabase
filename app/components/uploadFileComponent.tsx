@@ -27,7 +27,7 @@ export async function UploadFileComponent() {
   } else {
     return (
       <>
-        <a href="/protected">
+        <a href="/upload_file">
           <Button>Upload file</Button>
         </a>
         <URLsTable links={links!} />
