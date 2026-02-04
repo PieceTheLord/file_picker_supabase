@@ -9,22 +9,22 @@ const PricingSection = () => {
       {/* Anonymous (Free Tier) */}
       <Card className="h-full">
         <CardHeader>
-          <CardTitle className="text-4xl">Anonymous</CardTitle>
-          <CardDescription>For quick, secure file transfers.</CardDescription>
+          <CardTitle className="text-4xl">Анонимный</CardTitle>
+          <CardDescription>Для быстрой и безопасной передачи файлов.</CardDescription>
         </CardHeader>
         <CardContent className="grid gap-4">
-          <div className="text-4xl font-bold">$0 / mo</div>
+          <div className="text-4xl font-bold">$0 / мес</div>
           <ul className="text-xl">
-            <li className="flex items-center gap-2"><CheckCircle className="h-4 w-4 text-green-500" /> Max File Size: 50 MB</li>
-            <li className="flex items-center gap-2"><CheckCircle className="h-4 w-4 text-green-500" /> File Expiration: 24 Hours</li>
-            <li className="flex items-center gap-2"><CheckCircle className="h-4 w-4 text-green-500" /> Download Limit: 3 per file</li>
-            <li className="flex items-center gap-2"><CheckCircle className="h-4 w-4 text-green-500" /> Standard Encryption</li>
-            <li className="flex items-center gap-2"><CheckCircle className="h-4 w-4 text-green-500" /> "Powered by Expire.link"</li>
+            <li className="flex items-center gap-2"><CheckCircle className="h-4 w-4 text-green-500" /> Макс. размер файла: 50 МБ</li>
+            <li className="flex items-center gap-2"><CheckCircle className="h-4 w-4 text-green-500" /> Срок действия файла: 24 часа</li>
+            <li className="flex items-center gap-2"><CheckCircle className="h-4 w-4 text-green-500" /> Лимит загрузок: 3 на файл</li>
+            <li className="flex items-center gap-2"><CheckCircle className="h-4 w-4 text-green-500" /> Стандартное шифрование</li>
+            <li className="flex items-center gap-2"><CheckCircle className="h-4 w-4 text-green-500" /> "Работает на Expire.link"</li>
           </ul>
         </CardContent>
         <CardFooter className="justify-center items-start h-full ">
           <Button className=" cursor-default hover:bg-primary/0 py-2 px-6 text-2xs" variant={"outline"}>
-            Active
+            Активный
           </Button>
         </CardFooter>
       </Card>
@@ -32,25 +32,25 @@ const PricingSection = () => {
       {/* Agent (Pro Tier) */}
       <Card className="border-2 border-primary shadow-lg">
         <CardHeader className="relative">
-          <CardTitle className="text-4xl">Agent</CardTitle>
-          <CardDescription>For power users and freelancers.</CardDescription>
-          <Badge variant="default" className="bg-green-500 shadow-2xl text-2xs text-white w-[100px] text-center flex justify-center absolute right-0 top-0 -translate-y-1/2 translate-x-1/2 rounded-full h-[100px]   hover:bg-green-500">Popular</Badge>
+          <CardTitle className="text-4xl">Агент</CardTitle>
+          <CardDescription>Для опытных пользователей и фрилансеров.</CardDescription>
+          <Badge variant="default" className="bg-green-500 shadow-2xl text-2xs text-white w-[100px] text-center flex justify-center absolute right-0 top-0 -translate-y-1/2 translate-x-1/2 rounded-full h-[100px]   hover:bg-green-500">Популярный</Badge>
         </CardHeader>
         <CardContent className="grid gap-4">
-          <div className="text-4xl font-bold">$5 / mo <span className="text-sm">or $49 Lifetime</span></div>
+          <div className="text-4xl font-bold">$5 / мес <span className="text-sm">или $49 навсегда</span></div>
           <ul className="text-xl">
-            <li className="flex items-center gap-2"><CheckCircle className="h-4 w-4 text-green-500" /> Max File Size: 2 GB</li>
-            <li className="flex items-center gap-2"><CheckCircle className="h-4 w-4 text-green-500" /> File Expiration: 7 Days</li>
-            <li className="flex items-center gap-2"><CheckCircle className="h-4 w-4 text-green-500" /> Unlimited Downloads</li>
-            <li className="flex items-center gap-2"><CheckCircle className="h-4 w-4 text-green-500" /> Password Protection</li>
-            <li className="flex items-center gap-2"><CheckCircle className="h-4 w-4 text-green-500" /> "Burn on Read"</li>
-            <li className="flex items-center gap-2"><CheckCircle className="h-4 w-4 text-green-500" /> Access Logs</li>
-            <li className="flex items-center gap-2"><CheckCircle className="h-4 w-4 text-green-500" /> No Branding</li>
+            <li className="flex items-center gap-2"><CheckCircle className="h-4 w-4 text-green-500" /> Макс. размер файла: 2 ГБ</li>
+            <li className="flex items-center gap-2"><CheckCircle className="h-4 w-4 text-green-500" /> Срок действия файла: 7 дней</li>
+            <li className="flex items-center gap-2"><CheckCircle className="h-4 w-4 text-green-500" /> Неограниченное количество загрузок</li>
+            <li className="flex items-center gap-2"><CheckCircle className="h-4 w-4 text-green-500" /> Защита паролем</li>
+            <li className="flex items-center gap-2"><CheckCircle className="h-4 w-4 text-green-500" /> "Удалить после прочтения"</li>
+            <li className="flex items-center gap-2"><CheckCircle className="h-4 w-4 text-green-500" /> Журналы доступа</li>
+            <li className="flex items-center gap-2"><CheckCircle className="h-4 w-4 text-green-500" /> Без брендинга</li>
           </ul>
         </CardContent>
         <CardFooter className="justify-center">
           <Button asChild>
-            <a href="/checkout">Upgrade to Agent</a>
+            <a href="/checkout">Перейти на Agent</a>
           </Button>
         </CardFooter>
       </Card>

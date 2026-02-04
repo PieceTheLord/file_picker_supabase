@@ -8,7 +8,7 @@ export default function Page() {
         <AuthButton />
       </Suspense>
       <div className="flex gap-x-4 items-center">
-        <p className="text-2xs font-normal">Chose your theme:</p>
+        <p className="text-2xs font-normal">Выбери тему:</p>
         <ThemeSwitcher />
       </div>
     </>
