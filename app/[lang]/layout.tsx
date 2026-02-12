@@ -20,13 +20,15 @@ const geistSans = Geist({
   subsets: ["latin"],
 });
 
-export async function generateStaticParams() {
+export type RootLayoutParams = { lang: "en" | "ru" };
+
+export async function generateStaticParams(): Promise<RootLayoutParams[]> {
   return i18n.locales.map((locale) => ({ lang: locale }));
 }
 
 export default async function RootLayout(props: {
   children: React.ReactNode;
-  params: Promise<{ lang: Locale }>;
+  params: Promise<{ lang: "en" | "ru" }>;
 }) {
   const params = await props.params;
   const lang = params.lang;
