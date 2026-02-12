@@ -7,15 +7,18 @@ import Link from "next/link";
 import { Suspense } from "react";
 import { Navbar } from "@/app/components/navbar";
 import Footer from "@/app/components/footer";
-import { type Locale } from "@/lib/i18n-config";
+import { i18n } from "@/lib/i18n-config";
 
+export async function generateStaticParams() {
+  return i18n.locales.map((locale) => ({ lang: locale })) as const;
+}
 
 export default async function ProtectedLayout({
   children,
-  params
+  params,
 }: {
   children: React.ReactNode;
-  params: Promise<{ lang: Locale }>;
+  params: Promise<{ lang: "en" | "ru" }>;
 }) {
   const { lang } = await params;
   return (
