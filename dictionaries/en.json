@@ -1,0 +1,19 @@
+{
+  "common": {
+    "tariffs": "Tariffs",
+    "files": "Files",
+    "profile": "Profile",
+    "loadingAuth": "Loading auth...",
+    "loadingFiles": "Loading files..."
+  },
+  "profile": {
+    "chooseTheme": "Choose theme:",
+    "language": "Language",
+    "logout": "Logout"
+  },
+  "home": {
+    "title": "Download files wherever you need!",
+    "description": "Upload your files from any device and get easy access to them via a simple link, on your PC or phone.",
+    "cta": "Start today and experience the convenience of sharing and accessing files."
+  }
+}

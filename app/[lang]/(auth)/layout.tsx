@@ -5,21 +5,26 @@ import { ThemeSwitcher } from "@/components/theme-switcher";
 import { hasEnvVars } from "@/lib/utils";
 import Link from "next/link";
 import { Suspense } from "react";
-import Footer from "../components/footer";
-import { Navbar } from "../components/navbar";
+import { Navbar } from "@/app/components/navbar";
+import Footer from "@/app/components/footer";
+import { type Locale } from "@/lib/i18n-config";
 
-export default function ProtectedLayout({
+
+export default async function ProtectedLayout({
   children,
+  params
 }: {
   children: React.ReactNode;
+  params: Promise<{ lang: Locale }>;
 }) {
+  const { lang } = await params;
   return (
     <main className="min-h-screen flex flex-col items-center">
       <div className="flex-1 w-full flex flex-col gap-20 items-center">
         <nav className="w-full flex justify-center border-b border-b-foreground/10 h-16">
           <div className="w-full max-w-5xl flex justify-end items-center p-3 px-5 text-sm">
             <Suspense>
-              <Navbar />
+              <Navbar lang={lang} />
             </Suspense>
           </div>
         </nav>
