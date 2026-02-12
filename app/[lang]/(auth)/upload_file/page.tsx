@@ -1,4 +1,4 @@
-import { FileUploadFormDemo } from "../../components/fileUpload";
+import { FileUploadFormDemo } from "@/app/components/fileUpload";
 import { Button } from "@/components/ui/button";
 
 export default async function ProtectedPage() {

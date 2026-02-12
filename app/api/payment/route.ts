@@ -1,4 +1,4 @@
-import { checkout } from '@/app/payments/Payments';
+import { checkout } from '@/app/[lang]/payments/Payments';
 import { ICreatePayment } from '@a2seven/yoo-checkout';
 import { NextResponse } from 'next/server';
 import { v4 as uuidv4 } from 'uuid';
@@ -9,8 +9,6 @@ export async function POST(request: Request) {
   console.log("Payment request initiated with idempotency key:", idempotenceKey); // Added logging
 
   const createPayload: ICreatePayment = {
-
-
     amount: {
       value: "2.00",
       currency: "RUB"
