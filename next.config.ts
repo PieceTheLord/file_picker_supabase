@@ -1,6 +1,10 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  i18n: {
+    defaultLocale: "ru",
+    locales: ["en", "ru"],
+  },
   cacheComponents: true,
   output: "standalone",
   // This is needed due to a typing issue in Next.js 16.1

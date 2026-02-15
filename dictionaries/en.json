@@ -15,5 +15,9 @@
     "title": "Download files wherever you need!",
     "description": "Upload your files from any device and get easy access to them via a simple link, on your PC or phone.",
     "cta": "Start today and experience the convenience of sharing and accessing files."
+  },
+  "auth": {
+    "title": "Enter your email below to login to your account",
+    "forgotPassword": ""
   }
 }
