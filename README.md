@@ -2,8 +2,7 @@
 
 **Monetize your Telegram Channel with digital downloads. No Stripe. No Banks. Just Stars.**
 
-![Project Banner][(https://placehold.co/1200x600/1e293b/FFF?text=StarDrop+Preview) https://stardrop-landing.vercel.app/](https://stardrop-landing.vercel.app/)
-*(Replace this link later with a real screenshot of your landing page)*
+[(https://placehold.co/1200x600/1e293b/FFF?text=StarDrop+Preview) https://stardrop-landing.vercel.app/](https://stardrop-landing.vercel.app/)
 
 ## 🚀 The Problem
 Creators in restricted regions (Russia, etc.) cannot easily sell digital products because Stripe/PayPal blocks them. 
