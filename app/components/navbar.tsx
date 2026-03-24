@@ -7,13 +7,13 @@ export const Navbar = ({}: NavbarProps) => {
   return (
     <div className="flex justify-center w-full">
       <a href="/tarifs">
-        <Button variant="link">Тарифы</Button>
+        <Button variant="link">Tarifs</Button>
       </a>
       <a href="/">
-        <Button variant="link">Фалы</Button>
+        <Button variant="link">Files</Button>
       </a>
       <a href="/profile">
-        <Button variant="link">Профиль</Button>
+        <Button variant="link">Profile</Button>
       </a>
 
     </div>
