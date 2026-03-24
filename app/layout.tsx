@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { Geist } from "next/font/google";
 import { ThemeProvider } from "next-themes";
-import "../globals.css";
-import { i18n, type Locale } from "@/lib/i18n-config";
+import "./globals.css";
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
@@ -20,21 +19,13 @@ const geistSans = Geist({
   subsets: ["latin"],
 });
 
-export type RootLayoutParams = { lang: Locale };
-
-export async function generateStaticParams(): Promise<RootLayoutParams[]> {
-  return i18n.locales.map((locale) => ({ lang: locale }));
-}
-
-export default async function RootLayout(props: {
+export default function RootLayout({
+  children,
+}: Readonly<{
   children: React.ReactNode;
-  params: Promise<{ lang: Locale }>;
-}) {
-  const params = await props.params;
-  const lang = params.lang;
-
+}>) {
   return (
-    <html lang={lang} suppressHydrationWarning>
+    <html suppressHydrationWarning>
       <body className={`${geistSans.className} antialiased`}>
         <ThemeProvider
           attribute="class"
@@ -42,7 +33,7 @@ export default async function RootLayout(props: {
           enableSystem
           disableTransitionOnChange
         >
-          {props.children}
+          {children}
         </ThemeProvider>
       </body>
     </html>

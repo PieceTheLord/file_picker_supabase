@@ -1,24 +1,19 @@
 import { Button } from "@/components/ui/button";
-import { type Locale } from "@/lib/i18n-config";
-import Link from "next/link";
+import cls from "Navbar.module.scss";
 
-interface NavbarProps {
-  lang: Locale;
-}
+interface NavbarProps {}
 
-export const Navbar = ({ lang }: NavbarProps) => {
-  const isRu = lang === "ru";
-
+export const Navbar = ({}: NavbarProps) => {
   return (
     <div className="flex justify-center w-full">
       <a href="/tarifs">
-        <Button variant="link">Tarifs</Button>
+        <Button variant="link">Тарифы</Button>
       </a>
       <a href="/">
-        <Button variant="link">Files</Button>
+        <Button variant="link">Фалы</Button>
       </a>
       <a href="/profile">
-        <Button variant="link">Profile</Button>
+        <Button variant="link">Профиль</Button>
       </a>
 
     </div>

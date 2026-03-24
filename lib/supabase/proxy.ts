@@ -2,7 +2,6 @@ import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 import { hasEnvVars } from "../utils";
 import { createClient } from "./server";
-import { getLocale } from "@/proxy";
 
 export async function updateSession(request: NextRequest) {
   let supabaseResponse = NextResponse.next({
@@ -36,8 +35,7 @@ export async function updateSession(request: NextRequest) {
   ) {
     // no user, potentially respond by redirecting the user to the login page
     const url = request.nextUrl.clone();
-    const locale = getLocale(request)
-    url.pathname = `/${locale}/auth/login`;
+    url.pathname = `/auth/login`;
     return NextResponse.redirect(url);
   }
 

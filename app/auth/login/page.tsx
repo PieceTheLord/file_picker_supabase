@@ -1,16 +1,13 @@
 import { LoginForm } from "@/components/login-form";
-import { Locale } from "@/lib/i18n-config";
-import { useParams, usePathname } from "next/navigation";
 import { Suspense } from "react";
 
-export default function Page({ params }: { params: { lang: Locale } }) {
-  const { lang } = params;
+export default function Page() {
 
   return (
     <div className="flex min-h-svh w-full items-center justify-center p-6 md:p-10">
       <div className="w-full max-w-sm">
         <Suspense fallback={<p>Loading...</p>}>
-          <LoginForm lang={lang} />
+          <LoginForm />
         </Suspense>
       </div>
     </div>
