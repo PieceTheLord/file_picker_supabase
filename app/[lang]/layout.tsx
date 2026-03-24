@@ -11,7 +11,7 @@ const defaultUrl = process.env.VERCEL_URL
 export const metadata: Metadata = {
   metadataBase: new URL(defaultUrl),
   title: "Downloader",
-  description: "The fastest way to share your small files everywhere!",
+  description: "The fastest way to share your files everywhere!",
 };
 
 const geistSans = Geist({
@@ -20,7 +20,7 @@ const geistSans = Geist({
   subsets: ["latin"],
 });
 
-export type RootLayoutParams = { lang: "en" | "ru" };
+export type RootLayoutParams = { lang: Locale };
 
 export async function generateStaticParams(): Promise<RootLayoutParams[]> {
   return i18n.locales.map((locale) => ({ lang: locale }));
@@ -28,7 +28,7 @@ export async function generateStaticParams(): Promise<RootLayoutParams[]> {
 
 export default async function RootLayout(props: {
   children: React.ReactNode;
-  params: Promise<{ lang: "en" | "ru" }>;
+  params: Promise<{ lang: Locale }>;
 }) {
   const params = await props.params;
   const lang = params.lang;

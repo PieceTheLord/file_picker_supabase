@@ -1,50 +1,87 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
+
+import { i18n } from "./lib/i18n-config";
+
 import { match as matchLocale } from "@formatjs/intl-localematcher";
-import Negotiator from "negotiator";
-import { i18n, Locale } from "./lib/i18n-config";
-import { createServerClient } from "@supabase/ssr";
-import { hasEnvVars } from "./lib/utils";
-import { createClient } from "./lib/supabase/server";
-import { updateSession } from "./lib/supabase/proxy";
-import { getLocale } from "./lib/get-locale";
 
+export function getLocale(request: NextRequest): string {
+  const accept = request.headers.get("accept-language") || "";
+  const languages = accept
+    .split(",")
+    .map((s) => s.split(";")[0].trim())
+    .filter(Boolean);
 
+  const locales = Array.from(i18n.locales);
+  const locale = matchLocale(languages, locales, i18n.defaultLocale);
+  return locale;
+}
 
 export async function proxy(request: NextRequest) {
-  //i18n implementation
-
   const pathname = request.nextUrl.pathname;
+
+  // // `/_next/` and `/api/` are ignored by the watcher, but we need to ignore files in `public` manually.
+  // // If you have one
+  // if (
+  //   [
+  //     '/manifest.json',
+  //     '/favicon.ico',
+  //     // Your other files in `public`
+  //   ].includes(pathname)
+  // )
+  //   return
 
   // Check if there is any supported locale in the pathname
   const pathnameIsMissingLocale = i18n.locales.every(
-    (locale: Locale) =>
+    (locale) =>
       !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`,
   );
+
   // Redirect if there is no locale
   if (pathnameIsMissingLocale) {
     const locale = getLocale(request);
 
     // e.g. incoming request is /products
     // The new URL is now /en-US/products
-    request.nextUrl.pathname = `/${locale}${pathname.startsWith("/") ? "" : "/"}${pathname}`
-    return updateSession(request)
+    return NextResponse.redirect(
+      new URL(
+        `/${locale}${pathname.startsWith("/") ? "" : "/"}${pathname}`,
+        request.url,
+      ),
+    );
   }
-  return updateSession(request)
-  // IMPORTANT: You *must* return the supabaseResponse object as it is.
+
+  // Session check: call server-side route so we don't import server-only
+  // code into Edge middleware.
+  try {
+    // Only check sessions for protected paths
+    if (
+      pathname !== "/" &&
+      !pathname.startsWith("/login") &&
+      !pathname.startsWith("/auth")
+    ) {
+      const sessionRes = await fetch(new URL("/api/session", request.url), {
+        headers: { cookie: request.headers.get("cookie") || "" },
+      });
+
+      if (sessionRes.ok) {
+        const { authenticated } = await sessionRes.json();
+        if (!authenticated) {
+          const locale = getLocale(request);
+          const url = request.nextUrl.clone();
+          url.pathname = `/${locale}/auth/login`;
+          return NextResponse.redirect(url);
+        }
+      }
+    }
+  } catch {
+    // On error, fall through to next() — avoid breaking the request.
+  }
+
+  return NextResponse.next();
 }
 
-
 export const config = {
-  matcher: [
-    /*
-     * Match all request paths except:
-     * - _next/static (static files)
-     * - _next/image (image optimization files)
-     * - favicon.ico (favicon file)
-     * - images - .svg, .png, .jpg, .jpeg, .gif, .webp
-     * - api routes
-     */
-    "/((?!api|_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
-  ],
+  // Matcher ignoring `/_next/` and `/api/`
+  matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
 };

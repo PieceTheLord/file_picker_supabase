@@ -17,15 +17,15 @@ export function EmptyOutline() {
         <EmptyMedia variant="icon">
           <CloudUpload />
         </EmptyMedia>
-        <EmptyTitle>Ты не загрузил ещё ни одного файла!</EmptyTitle>
+        <EmptyTitle>You have not uploaded any file yet!</EmptyTitle>
         <EmptyDescription>
-          Загружай файлы и получи к ним доступ откуда угодно
+          Upload files and have access to them from anywhere.
         </EmptyDescription>
       </EmptyHeader>
       <EmptyContent>
         <a href="/protected">
           <Button variant="outline" size="sm">
-            Загрузить файл
+            Upload Files
           </Button>
         </a>
       </EmptyContent>

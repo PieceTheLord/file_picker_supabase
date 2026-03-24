@@ -11,15 +11,16 @@ export const Navbar = ({ lang }: NavbarProps) => {
 
   return (
     <div className="flex justify-center w-full">
-      <Link href={`/${lang}/tarifs`}>
-        <Button variant="link">{isRu ? "Тарифы" : "Tariffs"}</Button>
-      </Link>
-      <Link href={`/${lang}`}>
-        <Button variant="link">{isRu ? "Файлы" : "Files"}</Button>
-      </Link>
-      <Link href={`/${lang}/profile`}>
-        <Button variant="link">{isRu ? "Профиль" : "Profile"}</Button>
-      </Link>
+      <a href="/tarifs">
+        <Button variant="link">Tarifs</Button>
+      </a>
+      <a href="/">
+        <Button variant="link">Files</Button>
+      </a>
+      <a href="/profile">
+        <Button variant="link">Profile</Button>
+      </a>
+
     </div>
   );
 };

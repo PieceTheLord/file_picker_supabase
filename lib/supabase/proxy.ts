@@ -2,8 +2,7 @@ import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 import { hasEnvVars } from "../utils";
 import { createClient } from "./server";
-import { i18n, Locale } from "../i18n-config";
-import { getLocale } from "../get-locale";
+import { getLocale } from "@/proxy";
 
 export async function updateSession(request: NextRequest) {
   let supabaseResponse = NextResponse.next({
@@ -18,7 +17,7 @@ export async function updateSession(request: NextRequest) {
 
   // With Fluid compute, don't put this client in a global environment
   // variable. Always create a new one on each request.
-  const supabase = await createClient()
+  const supabase = await createClient();
 
   // Do not run code between createServerClient and
   // supabase.auth.getClaims(). A simple mistake could make it very hard to debug
@@ -36,16 +35,9 @@ export async function updateSession(request: NextRequest) {
     !request.nextUrl.pathname.startsWith("/auth")
   ) {
     // no user, potentially respond by redirecting the user to the login page
-    const pathname = request.nextUrl.pathname;
-    const pathnameIsMissingLocale = i18n.locales.every(
-      (locale: Locale) =>
-        !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`,
-    );
-
     const url = request.nextUrl.clone();
-    const locale = getLocale(request);
-
-    url.pathname = `/${locale}${pathname.startsWith("/") ? "" : "/"}${pathname}`;
+    const locale = getLocale(request)
+    url.pathname = `/${locale}/auth/login`;
     return NextResponse.redirect(url);
   }
 

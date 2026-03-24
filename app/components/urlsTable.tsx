@@ -26,13 +26,13 @@ interface Link {
 export async function URLsTable({ links }: { links: Link[] }) {
   return (
     <Table>
-      <TableCaption>Список ваших загруженных файлов</TableCaption>
+      <TableCaption>The list of your uploaded files </TableCaption>
       <TableHeader>
         <TableRow>
-          <TableHead>Имя файла</TableHead>
+          <TableHead>file name</TableHead>
           <TableHead></TableHead>
-          <TableHead>Истекает</TableHead>
-          <TableHead className="text-right">Доступен</TableHead>
+          <TableHead>expires_at</TableHead>
+          <TableHead className="text-right">Available</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
@@ -50,14 +50,14 @@ export async function URLsTable({ links }: { links: Link[] }) {
               {new Date(link.expires_at) > new Date() ? (
                 <>
                   <a href={link.signedURL}>
-                    <Button>Скачать</Button>
+                    <Button>Download</Button>
                   </a>
                   <Suspense fallback="loading CSR">
                     <PopoverCopy link={link.signedURL} />
                   </Suspense>
                 </>
               ) : (
-                <p>Недоступно для скачивания</p>
+                <p>Unavailable to download</p>
               )}
             </TableCell>
             <TableCell className="text-left" key={link.expires_at}>
